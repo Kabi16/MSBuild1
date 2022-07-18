@@ -3,7 +3,7 @@
 @SET CHAINEDCALL=true
 @SET SONAR=true
 @SET UTC=true
-@SET COVERAGE=true
+@SET COVERAGE=false
 @SET MODE=Release
 @FOR %%A IN (%*) DO @IF "%%A"=="nochain" @SET CHAINEDCALL=false
 @FOR %%A IN (%*) DO @IF "%%A"=="nosonar" @SET SONAR=false
