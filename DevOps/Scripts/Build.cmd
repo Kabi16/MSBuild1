@@ -14,9 +14,9 @@
 REM Provide solution path and sonar key for the service
 @SET SOLU="C:\Users\C605978\source\repos\MSBuild\MSBuild.sln"
 @SET SOLUPATH="C:\Users\C605978\source\repos\MSBuild"
-@SET SCRIPTPATH="..\..\DevOps\Scripts"
-@SET SONARKEY="MSBuild"
-@SET SONARNAME="MSBuild"
+@SET SCRIPTPATH="C:\Users\C605978\source\repos\MSBuild\DevOps\Scripts"
+@SET SONARKEY="SonarAndJenkins"
+@SET SONARNAME="SonarQube1"
 
 @SET MSBUILDDIR=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin
 @SET SONARPATH=C:\sonar-scanner-msbuild-4.6.0.1930-net46
