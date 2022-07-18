@@ -12,28 +12,28 @@
 @FOR %%A IN (%*) DO @IF "%%A"=="Debug" @SET MODE=Debug
 
 REM Provide solution path and sonar key for the service
-@SET SOLU="..\..\src\MBCommonLibraryCore\MBCommonLibraryCore.sln"
-@SET SOLUPATH="..\..\src\MBCommonLibraryCore"
+@SET SOLU="C:\Users\C605978\source\repos\MSBuild\MSBuild.sln"
+@SET SOLUPATH="C:\Users\C605978\source\repos\MSBuild"
 @SET SCRIPTPATH="..\..\DevOps\Scripts"
-@SET SONARKEY="MB-Common-Library-Core"
-@SET SONARNAME="MB-Common-Library-Core"
+@SET SONARKEY="MSBuild"
+@SET SONARNAME="MSBuild"
 
-
-@SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
+@SET MSBUILDDIR=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin
 @SET SONARPATH=C:\sonar-scanner-msbuild-4.6.0.1930-net46
-@SET COVERAGEPATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools
+@SET COVERAGEPATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Team Tools\Dynamic Code Coverage Tools
 
 @ECHO *** Build Script Execution Starts ***
 
 @ECHO *** Restore Nuget Package ***
 REM "%SOLUPATH%\.nuget\NuGet.exe" restore %SOLU%
 CD %SOLUPATH% 
-dotnet restore
+dotnet restore --configfile ".nuget\nuget.config"
 @ECHO *** Restoration of Nuget package completed ***
 CD %SCRIPTPATH%
+
 @IF "%SONAR%"=="true" (
 @ECHO *** Sonarqube static code analysis starts ***
-@"%SONARPATH%\SonarScanner.MSBuild.exe" begin /k:%SONARKEY% /n:%SONARNAME% /v:"0.1" /d:sonar.cs.vscoveragexml.reportsPaths="TestResults\coverage.xml"
+@"%SONARPATH%\SonarScanner.MSBuild.exe" begin /k:%SONARKEY% /n:%SONARNAME% /v:"0.1" /d:sonar.cs.vscoveragexml.reportsPaths="TestResults\coverage.xml" /d:sonar.qualitygate.wait=true
 @ECHO.
 )
 
