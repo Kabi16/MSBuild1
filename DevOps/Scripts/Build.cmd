@@ -19,7 +19,7 @@ REM Provide solution path and sonar key for the service
 @SET SONARNAME="SonarQube1"
 
 @SET MSBUILDDIR=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin
-@SET SONARPATH=C:\sonar-scanner-msbuild-4.6.0.1930-net46
+@SET SONARPATH=C:\Users\C605978\sonarqube-9.4.0.54424\sonar-scanner-msbuild-5.7.2.50892-net5.0
 @SET COVERAGEPATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Team Tools\Dynamic Code Coverage Tools
 
 @ECHO *** Build Script Execution Starts ***
