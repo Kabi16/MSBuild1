@@ -1,1 +1,1 @@
-# MB-Common-Library-Core
+# MSBuild
