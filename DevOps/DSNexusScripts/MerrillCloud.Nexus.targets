@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="ExecuteTestCase"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NugetExe>&quot;..\..\tools\nuget\nuget.exe&quot;</NugetExe>
+    <LocalNugetServer>https://dsdev.bridge.tm.toppanmerrill.com/nexus/repository/nuget-hosted/</LocalNugetServer>
+    <NugetApiKey>d6b16446-02e6-3b8c-ba77-2bf02714b976</NugetApiKey>
+    <Configuration>Release</Configuration>
+    <feedName>nuget-hosted</feedName>
+  </PropertyGroup>
+
+  <!--create nuget packages-->
+  <Target Name="NugetPack">
+    <ItemGroup>
+      <PackagesToPack Include="..\..\src\MBCommonLibraryCore\**\*.nuspec" Exclude="..\..\src\MBCommonLibraryCore\**\*.Test\*"/>
+    </ItemGroup>
+    <Exec Command="$(NugetExe) pack &quot;%(PackagesToPack.Identity)&quot; -Build -Symbols -Prop Configuration=$(Configuration)"/>
+  </Target>
+
+  <!--push to local nuget-->
+  <Target Name="NugetPush">
+    <ItemGroup>
+      <PackagesToPublish Include="*.nupkg"/>
+    </ItemGroup>
+	 <Exec Command="$(NugetExe) SetApiKey $(NugetApiKey) -Source $(LocalNugetServer)"/>
+	 <Exec Command="$(NugetExe) push &quot;%(PackagesToPublish.Identity)&quot; -Source $(LocalNugetServer)"/>    
+  </Target>
+
+</Project>

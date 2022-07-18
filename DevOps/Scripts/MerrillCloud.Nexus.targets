@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="ExecuteTestCase"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NugetExe>&quot;..\..\tools\nuget\nuget.exe&quot;</NugetExe>
+    <LocalNugetServer>http://stp1ijenapp001:8081/repository/nuget-hosted/</LocalNugetServer>
+    <NugetApiKey>e30ccc58-c62f-3300-a743-f78b2fbe51d4</NugetApiKey>
+    <Configuration>Release</Configuration>
+    <feedName>MerrillNuget</feedName>
+  </PropertyGroup>
+
+  <!--create nuget packages-->
+  <Target Name="NugetPack">
+    <ItemGroup>
+      <PackagesToPack Include="..\..\src\MBCommonLibraryCore\**\*.nuspec" Exclude="..\..\src\MBCommonLibraryCore\**\*.Test\*"/>
+    </ItemGroup>
+    <Exec Command="$(NugetExe) pack &quot;%(PackagesToPack.Identity)&quot; -Build -Symbols -Prop Configuration=$(Configuration)"/>
+  </Target>
+
+  <!--push to local nuget-->
+  <Target Name="NugetPush">
+    <ItemGroup>
+      <PackagesToPublish Include="*.nupkg"/>
+    </ItemGroup>
+	 <Exec Command="$(NugetExe) SetApiKey $(NugetApiKey) -Source $(LocalNugetServer)"/>
+	 <Exec Command="$(NugetExe) push &quot;%(PackagesToPublish.Identity)&quot; -Source $(LocalNugetServer)"/>    
+  </Target>
+
+</Project>
