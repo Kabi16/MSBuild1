@@ -4,28 +4,7 @@ pipeline {
    
    stages {
 	  
-       stage("Checkout Code")
-   {
-	checkout scm
-	}
-				
-	   
-   {
-	        bat 'cd devOps\\\\scripts'
-	        stage("Build Code")
-	    {
-		     bat '''cd devOps\\scripts
-		     call Build.cmd nosonar noutc nocoverage'''
-	    }
-	        stage("Unit test")
-	    {
-		     bat '''cd devOps\\scripts
-		     call Build.cmd nosonar nocoverage'''
-	    }
-	        
-   }
-   
-     stage('SonarQube analysis') {
+      stage('SonarQube analysis') {
       steps {
          script {
         def scannerHome = tool 'SonarQube';
@@ -40,6 +19,23 @@ pipeline {
         }
      }
   }
+				
+    {
+	        bat 'cd devOps\\\\scripts'
+	        stage("Build Code")
+	    {
+		     bat '''cd devOps\\scripts
+		     call Build.cmd nosonar noutc nocoverage'''
+	    }
+	        stage("Unit test")
+	    {
+		     bat '''cd devOps\\scripts
+		     call Build.cmd nosonar nocoverage'''
+	    }
+	        
+   }
+   
+     
           stage("Quality Gates"){
              steps {
                 timeout(time: 1,unit: 'HOURS') {
