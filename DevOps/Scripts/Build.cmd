@@ -50,19 +50,6 @@ CD %SCRIPTPATH%
 @ECHO Build End:   %EndTime%
 @ECHO *** Rebuild in %MODE% mode completed ***
 
-@IF "%UTC%"=="true" (
-@ECHO *** Unit Test Execution Starts ***
-@RD TestResults /s /q > nul 2>&1
-@"%MSBUILDDIR%\msbuild.exe" JMSService.UnitTest.targets /p:SolutionPath=%SOLUPATH% /p:Configuration=%MODE%  /target:ExecuteTestCase > .\UnitTestOutput.txt
-ping 127.0.0.1 -n 3 > nul
-@ECHO *** Display Unit Test Results ***
-type UnitTestOutput.txt
-findstr /c:"Build succeeded" UnitTestOutput.txt
-@SET BUILD_STATUS=%ERRORLEVEL% 
-ECHO *** Unit Test Case Status : %ERRORLEVEL% *** 
-@IF NOT %BUILD_STATUS%==0 goto fail
-@ECHO *** Unit Test Execution Completed ***
-)
 
 @IF "%COVERAGE%"=="true" (
 "%COVERAGEPATH%\CodeCoverage.exe" analyze /output:"TestResults\coverage.xml" "TestResults\output.coverage"
