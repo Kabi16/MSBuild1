@@ -19,7 +19,6 @@ pipeline {
         }
      }
   }
-     stage("Build") {
 	        bat 'cd devOps\\\\scripts'
 	        stage("Build Code")
 	    {
@@ -49,5 +48,4 @@ pipeline {
             }
          }    
         }
-   }
 }
