@@ -51,7 +51,7 @@ CD %SCRIPTPATH%
 @ECHO *** Rebuild in %MODE% mode completed ***
 
 
-@IF "%COVERAGE%"=="true" (
+@IF "%COVERAGE%"=="false" (
 "%COVERAGEPATH%\CodeCoverage.exe" analyze /output:"TestResults\coverage.xml" "TestResults\output.coverage"
 @SET BUILD_STATUS=%ERRORLEVEL% 
 @IF not %BUILD_STATUS%==0 goto fail 
