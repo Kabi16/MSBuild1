@@ -19,6 +19,15 @@ pipeline {
         }
      }
   }
+    stage("Checkout Code")
+    {
+	checkout scm
+    }
+   validateCode()
+	   
+  
+  def validateCode()
+   {
 	        bat 'cd devOps\\\\scripts'
 	        stage("Build Code")
 	    {
@@ -48,4 +57,5 @@ pipeline {
             }
          }    
         }
+  }
 }
