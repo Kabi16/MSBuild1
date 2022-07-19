@@ -2,7 +2,7 @@ def pipeline
 
 env.AppName="MSBuild"
 
-node('master') {
+
 	  switch (env.BRANCH_NAME) {
 			case ~/^PR.*/:
 			    echo " loading verify-pipeline ${env.BRANCH_NAME}"
