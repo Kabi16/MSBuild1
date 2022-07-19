@@ -5,7 +5,7 @@
 @FOR %%A IN (%*) DO @IF "%%A"=="nochain" @SET CHAINEDCALL=false
 @FOR %%A IN (%*) DO @IF "%%A"=="Release" @SET MODE=Release
 
-@SET SOLU="..\..\GraphicLogReader\GraphicLogReader.csproj"
+@SET SOLU="C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj"
   
 @SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin
 
