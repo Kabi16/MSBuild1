@@ -59,7 +59,7 @@ CD %SCRIPTPATH%
 )
 
 @IF "%SONAR%"=="true" (
-"%SONARPATH%\SonarScanner.MSBuild.exe" end
+"%SONARPATH%\sonar-scanner-4.7.0.2747\bin\sonar-scanner.exe" end
 @ECHO *** Sonarqube static code analysis Completed ***
 )
 
