@@ -20,20 +20,31 @@ pipeline {
      }
   }
 				
-    {
-	        bat 'cd devOps\\\\scripts'
-	        stage("Build Code")
-	    {
-		     bat '''cd devOps\\scripts
-		     call Build.cmd nosonar noutc nocoverage'''
-	    }
-	        stage("Unit test")
-	    {
-		     bat '''cd devOps\\scripts
-		     call Build.cmd nosonar nocoverage'''
-	    }
-	        
-   }
+    stage("Build") {
+        when {
+           expression {
+              BRANCH_NAME == 'master'
+           }
+        }
+       steps {
+            echo "Building the application"
+       }
+     }
+     
+     stage("Test") {
+         when {
+           expression {
+              BRANCH_NAME == 'master'
+           }
+        }
+       steps {
+            echo "Testing the application"
+       }
+     }
+     
+     stage("Deploy") {
+        steps {
+            echo "Deploying the application"
    
      
           stage("Quality Gates"){
@@ -47,6 +58,8 @@ pipeline {
                     }
             }
          }    
+       }
+      }
     }
    }
 }
