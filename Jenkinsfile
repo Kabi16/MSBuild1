@@ -19,7 +19,6 @@ env.AppName="MSBuild"
                 break
      }
 	 echo "Running ${env.BRANCH_NAME} -- ${env.BUILD_ID} on ${env.JENKINS_URL}"	 
-}
 	   
 
   def validateCode()
