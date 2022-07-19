@@ -6,7 +6,7 @@ node('master') {
 	  switch (env.BRANCH_NAME) {
 			case ~/^PR.*/:
 			    echo " loading verify-pipeline ${env.BRANCH_NAME}"
-				dir("D:\\Workspace\\MB\\pr\\${env.AppName}\\${env.BRANCH_NAME}\\${env.BUILD_ID}") {	
+				dir("C:\\Users\\C605978\\source\\repos\\MSBuild\\${env.AppName}\\${env.BRANCH_NAME}\\${env.BUILD_ID}") {	
 				stage("Checkout Code")
 				{
 					checkout scm
