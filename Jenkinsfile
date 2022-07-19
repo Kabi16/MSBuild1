@@ -45,7 +45,8 @@ pipeline {
      stage("Deploy") {
         steps {
             echo "Deploying the application"
-   
+	}
+     }
      
           stage("Quality Gates") {
              steps {
@@ -60,6 +61,4 @@ pipeline {
          }    
        }
       }
-    }
-   }
-}
+  }
