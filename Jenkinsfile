@@ -1,27 +1,15 @@
-def pipeline
+pipeline {
 
-env.AppName="MSBuild"
-
-node()
-	  switch (env.BRANCH_NAME) {
-			case ~/^PR.*/:
-			    echo " loading verify-pipeline ${env.BRANCH_NAME}"
-				dir("C:\\Users\\C605978\\source\\repos\\MSBuild\\${env.AppName}\\${env.BRANCH_NAME}\\${env.BUILD_ID}") {	
-				stage("Checkout Code")
-				{
-					checkout scm
-				}
-				validateCode()	
-				}
-                break            
-            default :
-                echo "No pipelines configured for branch ${env.BRANCH_NAME}, halting"
-                break
-     }
-	 echo "Running ${env.BRANCH_NAME} -- ${env.BUILD_ID} on ${env.JENKINS_URL}"	 
+   agent any
+   
+   stages {
+	  
+       stage("Checkout Code")
+   {
+	checkout scm
+	}
+				
 	   
-
-  def validateCode()
    {
 	        bat 'cd devOps\\\\scripts'
 	        stage("Build Code")
@@ -64,3 +52,5 @@ node()
             }
          }    
     }
+   }
+}
