@@ -33,7 +33,7 @@ CD %SCRIPTPATH%
 
 @IF "%SONAR%"=="true" (
 @ECHO *** Sonarqube static code analysis starts ***
-@"%SONARPATH%\SonarScanner.MSBuild.exe" begin /k:%SONARKEY% /n:%SONARNAME% /v:"0.1" /d:sonar.cs.vscoveragexml.reportsPaths="TestResults\coverage.xml" /d:sonar.qualitygate.wait=true
+@"%SONARPATH%\sonar-scanner-4.7.0.2747\bin\sonar-scanner.exe" begin /k:%SONARKEY% /n:%SONARNAME% /v:"0.1" /d:sonar.cs.vscoveragexml.reportsPaths="TestResults\coverage.xml" /d:sonar.qualitygate.wait=true
 @ECHO.
 )
 
