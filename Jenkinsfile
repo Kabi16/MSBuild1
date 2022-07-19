@@ -21,9 +21,7 @@ pipeline {
   }
 				
     stage("Build") {
-        when {
-           expression {
-              BRANCH_NAME == 'master'
+        bat 'cd DevOps/Scripts'
            }
         }
        steps {
