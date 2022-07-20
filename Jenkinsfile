@@ -56,4 +56,3 @@ stage('Publish'){
      }
   }
  }
-}
