@@ -1,5 +1,3 @@
-
-#environment and triggers as a script
 pipeline{
     agent any
     
