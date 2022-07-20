@@ -2,8 +2,7 @@
 pipeline {
     
     agent any
-    
-    stages {
+ 
     
     environment {
         dotnet ='C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\MSBuild.exe'
@@ -14,7 +13,7 @@ pipeline {
     }
  }
 
-stages{
+stages {
  stage('Checkout') {
     steps {
      git url: 'https://github.com/Kabi16/MSBuild1.git', branch: 'master'
