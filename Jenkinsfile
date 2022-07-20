@@ -3,17 +3,6 @@ pipeline {
     
     agent any
     
-    stages {
-    
-    environment {
-        dotnet ='C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\MSBuild.exe'
-        }
-        
-    triggers {
-        pollSCM 'H * * * *'
-    }
-  }
-}
 stages {
  stage('Checkout') {
     steps {
@@ -57,3 +46,4 @@ stage('Publish'){
      }
   }
  }
+}
