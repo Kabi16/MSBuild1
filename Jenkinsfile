@@ -1,60 +1,60 @@
-pipeline {
 
-   agent any
-   
-   stages {
-	  
-      stage('SonarQube analysis') {
-      steps {
-         script {
-        def scannerHome = tool 'SonarQube';
-        withSonarQubeEnv('SonarQube') {
-           bat "${scannerHome}/bin/sonar-scanner \
-              -D sonar.login=admin \
-              -D sonar.password=admin123 \
-              -D sonar.projectKey=SonarQube1 \
-              -D sonar.exclusions=vendor/**,resources/**,**/*.java \
-              -D sonar.host.url=http://5CG8301V3J:9000/"
-           }
+#environment and triggers as a script
+pipeline{
+    agent any
+    
+    environment {
+        dotnet ='C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MSBuild.exe'
         }
+        
+    triggers {
+        pollSCM 'H * * * *'
+    }
+ }
+
+#check out the code from Git
+tages{
+ stage('Checkout') {
+    steps {
+     git url: 'https://github.com/Kabi16/MSBuild1.git', branch: 'master'
      }
   }
-				
-    stage("Build") {
-        bat 'cd DevOps/Scripts'
-           }
-        }
-       steps {
-            echo "Building the application"
-       }
+
+#restore command
+stage('Restore packages'){
+   steps{
+      bat "dotnet restore C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj"
      }
-     
-     stage("Test") {
-         when {
-           expression {
-              BRANCH_NAME == 'master'
-           }
-        }
-       steps {
-            echo "Testing the application"
-       }
+  }
+
+#clean the solution
+stage('Clean'){
+    steps{
+        bat "dotnet clean C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj"
      }
-     
-     stage("Deploy") {
-        steps {
-            echo "Deploying the application"
-	}
-     }
-     
-          stage("Quality Gates") {
-             steps {
-                timeout(time: 1,unit: 'HOURS') {
-                   script {
-                       def qg = waitForQualityGate()
-                       if (qg.status != "OK") {
-                       error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                       }
-                    }
-            }
-         }    
    }
+
+#Build
+stage('Build'){
+   steps{
+      bat "dotnet build C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj --configuration Release"
+    }
+ }
+#Testing
+stage('Test: Unit Test'){
+   steps {
+     bat "dotnet test C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj"
+     }
+  }
+       
+ stage('Test: Integration Test'){
+    steps {
+       bat "dotnet test C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj"
+      }
+   }
+#Publish
+stage('Publish'){
+     steps{
+       bat "dotnet publish C:\Users\C605978\source\repos\MSBuild\src\MSBuild\MSBuild.csproj "
+     }
+}
