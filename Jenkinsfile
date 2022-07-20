@@ -2,7 +2,7 @@ pipeline{
     agent any
     
     environment {
-        dotnet ='C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MSBuild.exe'
+        dotnet ='C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\MSBuild.exe'
         }
         
     triggers {
