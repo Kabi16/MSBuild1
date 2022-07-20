@@ -3,6 +3,8 @@ pipeline {
     
     agent any
     
+    stages {
+    
     environment {
         dotnet ='C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\MSBuild.exe'
         }
@@ -54,4 +56,5 @@ stage('Publish'){
        bat "dotnet publish C:\\Users\\C605978\\source\\repos\\MSBuild\\src\\MSBuild\\MSBuild.csproj "
      }
   }
+ }
 }
