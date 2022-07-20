@@ -10,7 +10,7 @@ pipeline{
     }
  }
 
-tages{
+stages{
  stage('Checkout') {
     steps {
      git url: 'https://github.com/Kabi16/MSBuild1.git', branch: 'master'
@@ -51,4 +51,5 @@ stage('Publish'){
      steps{
        bat "dotnet publish C:\\Users\\C605978\\source\\repos\\MSBuild\\src\\MSBuild\\MSBuild.csproj "
      }
+  }
 }
